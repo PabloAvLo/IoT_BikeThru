@@ -1,0 +1,18 @@
+
+Using sudo raspi-config enable SPI
+	Interfaces-> enable SPI.
+
+Add line to config.txt
+	sudo nano /boot/config.txt
+	  dtoverlay=spi-bcm2708
+
+Install the SPI-Py library
+	git clone https://github.com/lthiery/SPI-Py
+	cd SPI-Py 
+	sudo python3 setup.py install
+
+Download the pi-rc522 files using
+	cd ~
+	git clone https://github.com/ondryaso/pi-rc522.git
+
+Locate the folder pi-rc522 on your pi, open it up and copy the folder pirc522 into the same folder you have saved the Code to run
