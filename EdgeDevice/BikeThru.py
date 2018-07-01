@@ -60,18 +60,21 @@ def leds_Setup():
     GPIO.output(GreenLed, GPIO.LOW)     # Set GreenLed high(+3.3V) to turn on led
 
 #-------------------- Methods
-def blink():
+def returnBike():
+    servo.ChangeDutyCycle(CloseServoDuty)# Move servo to 0 degrees
     GPIO.output(GreenLed, GPIO.HIGH)    # Green led on
     GPIO.output(RedLed, GPIO.LOW)       # Red led off
     time.sleep(2)
     GPIO.output(GreenLed, GPIO.LOW)     # Green led off
     GPIO.output(RedLed, GPIO.HIGH)      # Red led on
 
-def openLock():
+def rentaBike():
     servo.ChangeDutyCycle(OpenServoDuty)# Move servo to 90 degrees
-
-def closeLock():
-    servo.ChangeDutyCycle(CloseServoDuty)# Move servo to 0 degrees
+    #GPIO.output(GreenLed, GPIO.HIGH)    # Green led on
+    #GPIO.output(RedLed, GPIO.LOW)       # Red led off
+    #time.sleep(2)
+    GPIO.output(GreenLed, GPIO.LOW)     # Green led off
+    GPIO.output(RedLed, GPIO.HIGH)      # Red led on
 
 def destroy():
     GPIO.output(RedLed, GPIO.LOW)       # Red led off
@@ -95,10 +98,9 @@ if __name__ == '__main__':              # Program start from here
                 if not error:
                     #Print UID and turn on Green Led
                     print ("Card read UID: "+str(uid[0])+","+str(uid[1])+","+str(uid[2])+","+str(uid[3]))
-                    blink()
-                    closeLock()
+                    returnBike()
             time.sleep(0.7)
-            openLock()
+            rentaBike()
 
     #-------------------- Exceptions
     # When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
