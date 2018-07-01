@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<body>
+
+    <header>
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <!-- Slide One - Set the background image for this slide in the line below -->
+                <div class="carousel-item active" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/0/0b/Close-up_of_Bikes_in_Barclays_Bike_Hire_Docking_Station_on_Elizabeth_Bridge_-_geograph.org.uk_-_2021144.jpg')" onclick="location.href='@Url.Action("Map", "Home")'">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3 style="color: darkgoldenrod;  font-weight: bold">¿Dónde hay bicicletas?</h3>
+                        <p style="color: beige; font-size: 24px; font-weight: bold">Click en la imagen para ver el mapa de bicicletas</p>
+                    </div>
+                </div>
+                <!-- Slide Two - Set the background image for this slide in the line below -->
+                <div class="carousel-item" style="background-image: url('https://www.changedlivesnewjourneys.com/wp-content/uploads/2013/03/Statistics.jpg')">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3 style="color: darkgoldenrod">Datos de uso</h3>
+                        <p style="color: darkgoldenrod; font-size: 24px; font-weight: bold">richie playo</p>
+                    </div>
+                </div>
+                <!-- Slide Three - Set the background image for this slide in the line below -->
+                <div class="carousel-item" style="background-image: url('http://www.hdfondos.eu/preview/get_photo/184199/2048/1152')">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3 style="color: darkgoldenrod">Slide de relleno</h3>
+                        <p style="color: darkgoldenrod; font-size: 24px; font-weight: bold">Este slide es totalmente inútil, pero se ve más chiva con tres slides :)</p>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </header>
+    <!-- Page Content -->
+    <div class="container">
+        <h1 class="my-4">BikeThru</h1>
+        <!-- Portfolio Section -->
+        <div class="row">
+            <div class="col-lg-4 col-sm-6 portfolio-item">
+                <div class="card h-100">
+                    <a href="#"><img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8npmoFwteeaH-lLMupXjIx3t3IsJpji-oDzo-WdecqReOpRj3zQ" alt=""></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="#">¿Quiénes somos?</a>
+                        </h4>
+                        <p class="card-text">Somos un grupo de estudiantes universitarios que necesitamos pasar el curso y por eso nace el proyecto. </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 portfolio-item">
+                <div class="card h-100">
+                    <a href="#"><img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8npmoFwteeaH-lLMupXjIx3t3IsJpji-oDzo-WdecqReOpRj3zQ" alt=""></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="#">Misión</a>
+                        </h4>
+                        <p class="card-text">Pasar el curso JAJAJA</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 portfolio-item">
+                <div class="card h-100">
+                    <a href="#"><img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8npmoFwteeaH-lLMupXjIx3t3IsJpji-oDzo-WdecqReOpRj3zQ" alt=""></a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="#">Objetivo General</a>
+                        </h4>
+                        <p class="card-text">Brindar una plataforma electrónica que sea accesible para estudiantes de la UCR, de forma que puedan acceder a información de uso de las bicicletas, como su ubicación en tiempo real y disponibilidad</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+        <!-- Features Section -->
+        <div class="row">
+            <div class="col-lg-6">
+                <h2>Objetivos</h2>
+                <p>Los objetivos del proyecto son los siguientes:</p>
+                <ul>
+                    <li>
+                        Realizar un despliegue de la ubicación en tiempo real de las bicicletas haciendo uso del Google Maps API.
+                    </li>
+                    <li>Desplegar información de uso de bicicletas para cada usuario, como el tiempo de uso de las mismas y si posee multas por timeout*</li>
+                    <li>Analizar la información obtenida de las estaciones, para determinar cuáles estaciones tienen mayor cantidad de check ins y check outs.</li>
+                    <li>Procesar la información de uso de las bicicletas, para así darles el mantenimiento adecuado.</li>
+                </ul>
+                <p>*Timeout por sobrepasar el tiempo de uso de la bicicleta (20 mins).</p>
+            </div>
+            <div class="col-lg-6">
+                <img class="img-fluid rounded" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8npmoFwteeaH-lLMupXjIx3t3IsJpji-oDzo-WdecqReOpRj3zQ" alt="">
+            </div>
+        </div>
+        <!-- /.row -->
+        <hr>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; BikeThru 2018</p>
+        </div>
+        <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="../Content/vendor/jquery/jquery.min.js"></script>
+    <script src="../Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

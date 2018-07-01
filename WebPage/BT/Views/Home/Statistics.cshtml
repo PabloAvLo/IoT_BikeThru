@@ -1,0 +1,72 @@
+﻿
+@{
+//ViewBag.Message = "Statistics";
+}
+
+<h2>Names</h2>
+@foreach(string names in ViewBag.Name)
+{
+    <li>@names</li>
+}
+
+<h2>Carne</h2>
+@foreach (string carnes in ViewBag.Carne)
+{
+    <li>@carnes</li>
+}
+
+<h2>Emails</h2>
+@foreach (string emails in ViewBag.Email)
+{
+    <li>@emails</li>
+}
+
+<h2>Passwords</h2>
+@foreach (string pwds in ViewBag.Password)
+{
+    <li>@pwds</li>
+}
+
+<h2>Check Outs per User</h2>
+@foreach (string CIs in ViewBag.CI)
+{
+    <li>@CIs</li>
+}
+
+<h2>Check Outs per User</h2>
+@foreach (string COs in ViewBag.CO)
+{
+    <li>@COs</li>
+}
+
+<h2>Check Ins per Station</h2>
+@foreach (string CIStations in ViewBag.CIStation)
+{
+    <li>@CIStations</li>
+}
+
+<h2>Check Out per Station</h2>
+@foreach (string COStations in ViewBag.COStation)
+{
+    <li>@COStations</li>
+}
+
+@{ 
+    //Work in progress
+}
+<table>
+    <tr>
+        <th></th>
+        <th>
+            Id
+        </th>
+
+        <th>
+            Title
+        </th>
+
+    </tr>
+</table>
+
+
+
