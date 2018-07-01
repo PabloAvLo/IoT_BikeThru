@@ -33,35 +33,50 @@ import RPi.GPIO as GPIO
 import time
 
 #-------------------- Constants and variables
-RedLed = 11    # pin 11 - GPIO 17
-GreenLed = 29  # pin 29 - GPIO 5
+RedLed = 11                             # pin 11 - GPIO 17
+GreenLed = 29                           # pin 29 - GPIO 5
+ServoPin = 38                           # Servo pin 21 - GPIO 20
+OpenServoDuty = 5
+CloseServoDuty = 11.5
 
 # RFID setup
 rdr = RFID()
 util = rdr.util()
 util.debug = False
 
+# Servo Motor setup
+GPIO.setup(ServoPin,GPIO.OUT)           # Set Servo motor pin as output
+servo = GPIO.PWM(ServoPin, 50)          # Set Servo motor pin as PWM and 50 pulses per second
+servo.start(OpenServoDuty)              # Set pulse width to 7.5% to center the servo
+
 #-------------------- Setup
 def leds_Setup():
     GPIO.setmode(GPIO.BOARD)            # Numbers GPIOs by physical location
     # Red Led
     GPIO.setup(RedLed, GPIO.OUT)        # Set RedLed's mode is output
-    GPIO.output(RedLed, GPIO.HIGH)       # Set RedLed high(+3.3V) to turn on led
+    GPIO.output(RedLed, GPIO.HIGH)      # Set RedLed high(+3.3V) to turn on led
     # Green Led
     GPIO.setup(GreenLed, GPIO.OUT)      # Set GreenLed's mode is output
     GPIO.output(GreenLed, GPIO.LOW)     # Set GreenLed high(+3.3V) to turn on led
 
 #-------------------- Methods
 def blink():
-    GPIO.output(GreenLed, GPIO.HIGH)     # Green led on
-    GPIO.output(RedLed, GPIO.LOW)      # Red led off
+    GPIO.output(GreenLed, GPIO.HIGH)    # Green led on
+    GPIO.output(RedLed, GPIO.LOW)       # Red led off
     time.sleep(2)
-    GPIO.output(GreenLed, GPIO.LOW)    # Green led off
-    GPIO.output(RedLed, GPIO.HIGH)       # Red led on
+    GPIO.output(GreenLed, GPIO.LOW)     # Green led off
+    GPIO.output(RedLed, GPIO.HIGH)      # Red led on
+
+def openLock():
+    servo.ChangeDutyCycle(OpenServoDuty)# Move servo to 90 degrees
+
+def closeLock():
+    servo.ChangeDutyCycle(CloseServoDuty)# Move servo to 0 degrees
 
 def destroy():
     GPIO.output(RedLed, GPIO.LOW)       # Red led off
     GPIO.output(GreenLed, GPIO.LOW)     # Green led off
+    servo.stop()                        # Stop the servo
     GPIO.cleanup()
 
 ##################### MAIN
@@ -79,9 +94,11 @@ if __name__ == '__main__':              # Program start from here
                 (error, uid) = rdr.anticoll()
                 if not error:
                     #Print UID and turn on Green Led
-                    blink()
                     print ("Card read UID: "+str(uid[0])+","+str(uid[1])+","+str(uid[2])+","+str(uid[3]))
-            time.sleep(1)
+                    blink()
+                    closeLock()
+            time.sleep(0.7)
+            openLock()
 
     #-------------------- Exceptions
     # When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
