@@ -1,3 +1,5 @@
+REFERENCE:
+http://www.penguintutor.com/news/raspberrypi/rfid-rc522
 
 Using sudo raspi-config enable SPI
 	Interfaces-> enable SPI.
@@ -8,7 +10,7 @@ Add line to config.txt
 
 Install the SPI-Py library
 	git clone https://github.com/lthiery/SPI-Py
-	cd SPI-Py 
+	cd SPI-Py
 	sudo python3 setup.py install
 
 Download the pi-rc522 files using
