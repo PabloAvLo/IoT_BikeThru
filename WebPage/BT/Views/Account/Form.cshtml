@@ -1,0 +1,50 @@
+﻿@{
+        ViewBag.Title = "Register";
+ }
+
+    <div class="card col-sm-10" align="center">
+    <div class="card-header">
+         <h2>Create Account</h2>
+    </div>
+    <div class="form-control">
+        @using (Html.BeginForm("Submit", "Account"))
+        {
+        <fieldset class="col-sm-7">
+            <p>
+                <label class="col-sm-3 control-label" for="FullName">Name: </label>
+                @Html.TextBox("FullName")
+                @Html.ValidationMessage("FullName", "*")
+            </p>
+            <p>
+                <label class="col-sm-3 control-label" for="Carne">Carne:</label>
+                @Html.TextBox("Carne")
+                @Html.ValidationMessage("Carne", "*")
+            </p>
+            <p>
+                <label class="col-sm-3 control-label" for="Email">Email:</label>
+                @Html.TextBox("Email")
+                @Html.ValidationMessage("Email", "*")
+            </p>
+            <p>
+                <label class="col-sm-3 control-label" for="Password">Password:</label>
+                @Html.TextBox("Password")
+                @Html.ValidationMessage("Password", "*")
+            </p>
+            <p>
+                <label class="col-sm-3 control-label" for="Password">Confirm Password:</label>
+                @Html.TextBox("RePassword")
+                @Html.ValidationMessage("RePassword", "*")
+            </p>
+            <div class="col-sm-9 col-sm-offset-3">
+                <p>
+                    <input class="btn btn-primary btn-block" type="submit" value="Register" />
+                </p>
+            </div>
+        </fieldset>
+        }
+
+        <div class="col-sm-10">
+            @Html.ActionLink("Back to Home", "Index", "Home")
+        </div>
+      </div>
+    </div>
