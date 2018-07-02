@@ -1,6 +1,6 @@
-﻿
-@{
+﻿@{
 //ViewBag.Message = "Statistics";
+//@ViewBag.sizeList;
 }
 
 <h2>Names</h2>
@@ -28,45 +28,27 @@
 }
 
 <h2>Check Outs per User</h2>
-@foreach (string CIs in ViewBag.CI)
+@foreach (Int16 CIs in ViewBag.CI)
 {
     <li>@CIs</li>
 }
 
 <h2>Check Outs per User</h2>
-@foreach (string COs in ViewBag.CO)
+@foreach (Int16 COs in ViewBag.CO)
 {
     <li>@COs</li>
 }
 
 <h2>Check Ins per Station</h2>
-@foreach (string CIStations in ViewBag.CIStation)
+@foreach (int CIStations in ViewBag.CIStation)
 {
     <li>@CIStations</li>
 }
 
 <h2>Check Out per Station</h2>
-@foreach (string COStations in ViewBag.COStation)
+@foreach (int COStations in ViewBag.COStation)
 {
     <li>@COStations</li>
 }
-
-@{ 
-    //Work in progress
-}
-<table>
-    <tr>
-        <th></th>
-        <th>
-            Id
-        </th>
-
-        <th>
-            Title
-        </th>
-
-    </tr>
-</table>
-
 
 
