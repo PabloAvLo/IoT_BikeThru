@@ -2,7 +2,12 @@
 #                           Universidad de Costa Rica
 #                  			      IoT_BikeThru
 #
-# Author: Pablo Avila B30724
+# Authors:
+#   Pablo Avila                 B30724
+#   Guido Armas González        B30647
+#   Felipe Moya Coto            B24609
+#   Ricardo Quirós Redondo      B25353
+#   Javier Acosta Villalobos    A80056
 # Description:
 #*******************************************************************************
 

@@ -2,17 +2,14 @@
 #                           Universidad de Costa Rica
 #                  			      IoT_BikeThru
 #
-# Author: Pablo Avila B30724
-# Description: Search for RFID or NFC Tags near and displays its UID if found.
+# Authors:
+#   Pablo Avila                 B30724
+#   Guido Armas González        B30647
+#   Felipe Moya Coto            B24609
+#   Ricardo Quirós Redondo      B25353
+#   Javier Acosta Villalobos    A80056
 #
-# Run:
-#   sudo ifconfig
-#   sudo nmap -sn 192.168.1.0/24
-#   scp RFID.py pi@192.168.1.18:/home/Documents/UCR/IoT_BikeThru/RUN/
-#   ssh pi@192.168.1.18
-#   Password:<Password of the Pi>
-#   cd /home/Documents/UCR/IoT_BikeThru/RUN/
-#   python RFID.py
+# Description: Search for RFID or NFC Tags near and displays its UID if found.
 #*******************************************************************************
 
 #!/usr/bin/python3
