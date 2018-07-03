@@ -4,9 +4,9 @@
 #
 # Authors:
 #   Pablo Avila                 B30724
-#   Guido Armas González        B30647
+#   Guido Armas Gonzalez        B30647
 #   Felipe Moya Coto            B24609
-#   Ricardo Quirós Redondo      B25353
+#   Ricardo Quiros Redondo      B25353
 #   Javier Acosta Villalobos    A80056
 #
 # Description: This is the edge device for auto-rent a bike. If the barcode
@@ -37,13 +37,16 @@ from pirc522 import RFID
 import signal
 import RPi.GPIO as GPIO
 import time
+from signal import signal, alarm, SIGALRM
+import time
+
 
 #-------------------- Constants and variables
 RedLed = 11                             # pin 11 - GPIO 17
 GreenLed = 29                           # pin 29 - GPIO 5
 ServoPin = 38                           # Servo pin 21 - GPIO 20
 OpenServoDuty = 5
-CloseServoDuty = 11.5
+CloseServoDuty = 11
 
 # RFID setup
 rdr = RFID()
@@ -54,6 +57,9 @@ util.debug = False
 GPIO.setup(ServoPin,GPIO.OUT)           # Set Servo motor pin as output
 servo = GPIO.PWM(ServoPin, 50)          # Set Servo motor pin as PWM and 50 pulses per second
 servo.start(OpenServoDuty)              # Set pulse width to 7.5% to center the servo
+
+#Alarm setup
+signal(SIGALRM, lambda x,y:(1/0))
 
 #-------------------- Setup
 def leds_Setup():
@@ -76,9 +82,9 @@ def returnBike():
 
 def rentaBike():
     servo.ChangeDutyCycle(OpenServoDuty)# Move servo to 90 degrees
-    #GPIO.output(GreenLed, GPIO.HIGH)    # Green led on
-    #GPIO.output(RedLed, GPIO.LOW)       # Red led off
-    #time.sleep(2)
+    GPIO.output(GreenLed, GPIO.HIGH)    # Green led on
+    GPIO.output(RedLed, GPIO.LOW)       # Red led off
+    time.sleep(2)
     GPIO.output(GreenLed, GPIO.LOW)     # Green led off
     GPIO.output(RedLed, GPIO.HIGH)      # Red led on
 
@@ -88,6 +94,23 @@ def destroy():
     servo.stop()                        # Stop the servo
     GPIO.cleanup()
 
+def barcode_read(retry=1 ,wait =1):
+  i = 1
+  latest_read = ""
+  while (i <= retry):                   #Number of desired retries
+    try:
+      alarm(wait)                       #Calls an alarm to setup a timer for the desired wait for a new stdin
+      str = raw_input("Enter your input: ")
+      print("Received input is : " + str)
+      if (str):
+       latest_read = str
+    except ZeroDivisionError:
+      print("timed out")
+    i = i+1
+  print("Welcome "+ latest_read)
+  return latest_read
+
+
 ##################### MAIN
 if __name__ == '__main__':              # Program start from here
     leds_Setup()
@@ -95,18 +118,30 @@ if __name__ == '__main__':              # Program start from here
     #-------------------- Main Loop
     try:
         while True:
+            try:
+                #Review if ID input
+                ID = barcode_read()
+                #Request tag
+                (error, data) = rdr.request()
 
-            #Request tag
-            (error, data) = rdr.request()
-            if not error:
-                print ("\nDetected")
-                (error, uid) = rdr.anticoll()
-                if not error:
-                    #Print UID and turn on Green Led
-                    print ("Card read UID: "+str(uid[0])+","+str(uid[1])+","+str(uid[2])+","+str(uid[3]))
-                    returnBike()
-            time.sleep(0.7)
-            rentaBike()
+                if (ID != ""):
+                    print("New user ID detected:" + ID)
+                    rentaBike()
+                elif not error:
+                    print ("\nNew bike Detected")
+                    (error, uid) = rdr.anticoll()
+                    if not error:
+                         #Print UID
+                         print ("Card read UID: "+str(uid[0])+","+str(uid[1])+","+str(uid[2])+","+str(uid[3]))
+                         returnBike()
+                else:
+                    print "No user or bike was detected"
+                    GPIO.output(RedLed, GPIO.HIGH)       # Red led off
+                    GPIO.output(GreenLed, GPIO.LOW)     # Green led off
+                time.sleep(0.7)
+            #exception catch required for cases when a newbarcodeID is received during instruction execution other than stin reading
+            except ZeroDivisionError:
+               print ""
 
     #-------------------- Exceptions
     # When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
